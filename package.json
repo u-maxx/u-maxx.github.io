@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "build:css": "npx @tailwindcss/cli -i input.css -o dist/styles.css --minify",
+    "build": "node build.js",
     "watch:css": "npx @tailwindcss/cli -i input.css -o dist/styles.css --watch",
     "prepare": "husky"
   },
