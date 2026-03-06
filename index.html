@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maksym Uroda - Senior Software Engineer</title>
+
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Maksym Uroda - Senior Software Engineer">
+    <meta name="description" content="Senior Software Engineer with 15+ years of experience specializing in scalable architecture and AI. Expert in building advanced AI agents and intelligent web applications on Google Cloud Platform.">
+    <meta name="keywords" content="Maksym Uroda, Senior Software Engineer, AI, Vertex AI, Google Cloud Platform, E-commerce, Web Development, Portfolio">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="author" content="Maksym Uroda">
+    <link rel="canonical" href="https://maxuroda.pro/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://maxuroda.pro/">
+    <meta property="og:title" content="Maksym Uroda - Senior Software Engineer">
+    <meta property="og:description" content="Senior Software Engineer with 15+ years of experience specializing in scalable architecture and AI. Expert in building advanced AI agents and intelligent web applications on Google Cloud Platform.">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://maxuroda.pro/">
+    <meta property="twitter:title" content="Maksym Uroda - Senior Software Engineer">
+    <meta property="twitter:description" content="Senior Software Engineer with 15+ years of experience specializing in scalable architecture and AI. Expert in building advanced AI agents and intelligent web applications on Google Cloud Platform.">
+    <meta property="twitter:creator" content="@u_maxx">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Base Theme Colors */
+        :root {
+            --bg-dark: #090614;     /* Deep space purple/black */
+            --neon-green: #8eff7a;  /* Bright retro green */
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            font-family: 'Space Grotesk', sans-serif;
+            margin: 0;
+            overflow-x: hidden; /* Allow vertical scroll if needed, prevent horizontal */
+        }
+
+        .font-retro {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* 2D Wall Grid */
+        .bg-grid-wall {
+            position: fixed;
+            inset: 0;
+            background-size: 60px 60px;
+            background-image:
+                linear-gradient(to right, rgba(142, 255, 122, 0.07) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(142, 255, 122, 0.07) 1px, transparent 1px);
+            z-index: 0;
+        }
+
+        /* 3D Perspective Floor Grid */
+        .bg-grid-floor {
+            position: fixed;
+            bottom: 40px; /* Leaves room for the solid green footer bar */
+            width: 100vw;
+            height: 40vh;
+            background-image:
+                linear-gradient(to right, rgba(142, 255, 122, 0.3) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(142, 255, 122, 0.3) 1px, transparent 1px);
+            background-size: 60px 60px;
+            transform: perspective(600px) rotateX(75deg);
+            transform-origin: top;
+            z-index: 0;
+        }
+
+        /* Fades the floor grid into the dark background */
+        .floor-fade {
+            position: fixed;
+            bottom: 40px;
+            width: 100vw;
+            height: 40vh;
+            background: linear-gradient(to bottom, var(--bg-dark) 0%, transparent 100%);
+            z-index: 1;
+        }
+
+        /* Typography & Neon Effects */
+        .text-neon {
+            color: var(--neon-green);
+            text-shadow: 0 0 15px rgba(142, 255, 122, 0.4);
+        }
+
+        .btn-neon {
+            border-color: rgba(142, 255, 122, 0.6);
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .btn-neon:hover {
+            background-color: var(--neon-green);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px rgba(142, 255, 122, 0.6);
+            border-color: var(--neon-green);
+            transform: translateY(-2px);
+        }
+
+        /* Improved Readability Panel */
+        .glass-panel {
+            background: rgba(9, 6, 20, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(142, 255, 122, 0.2);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* CRT Scanline Effect */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0,0,0,0.2) 50%,
+                rgba(0,0,0,0.2)
+            );
+            background-size: 100% 4px;
+            z-index: 40; /* Above content but below footer/modals */
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        /* Animations */
+        @keyframes grid-move {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 60px; }
+        }
+
+        @keyframes neon-pulse {
+            0%, 100% { text-shadow: 0 0 10px rgba(142, 255, 122, 0.4), 0 0 20px rgba(142, 255, 122, 0.2); }
+            50% { text-shadow: 0 0 20px rgba(142, 255, 122, 0.6), 0 0 30px rgba(142, 255, 122, 0.4); }
+        }
+
+        .animate-grid-flow {
+            animation: grid-move 2s linear infinite;
+        }
+
+        .animate-pulse-neon {
+            animation: neon-pulse 3s infinite;
+        }
+
+        /* Skill Item Hover */
+        .skill-item {
+            transition: all 0.2s ease;
+            opacity: 0.8;
+        }
+        .skill-item:hover {
+            opacity: 1;
+            transform: translateX(5px);
+            text-shadow: 0 0 8px rgba(142, 255, 122, 0.5);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-center items-center relative text-white selection:bg-neon-green selection:text-bg-dark">
+
+    <div class="bg-grid-wall"></div>
+    <!-- Added animation class to floor -->
+    <div class="bg-grid-floor animate-grid-flow"></div>
+    <div class="floor-fade"></div>
+    <!-- Added Scanline Overlay -->
+    <div class="scanlines"></div>
+
+    <!-- Footer Bar with Copyright -->
+    <div class="fixed bottom-0 w-full h-10 flex items-center justify-center font-retro text-xs font-bold tracking-widest uppercase shadow-lg shadow-neon-green/20" style="background-color: var(--neon-green); color: var(--bg-dark); z-index: 50;">
+        &copy; <span id="year">2026&nbsp;</span> Maksym Uroda. All Rights Reserved.
+    </div>
+    <main class="z-10 text-center max-w-3xl px-6 py-20 relative w-full">
+
+        <h1 class="font-retro text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-wide leading-tight mb-6 transition-all duration-300">
+            <span class="text-white">Maksym Uroda</span><br>
+            <span class="text-neon block mt-2 sm:mt-0 animate-pulse-neon">Senior Software Engineer</span>
+        </h1>
+
+        <div class="glass-panel p-6 md:p-8 rounded-xl mb-12 mx-auto max-w-2xl transform transition-transform hover:scale-[1.01] duration-500">
+            <p class="text-sm sm:text-base md:text-lg text-gray-100 leading-relaxed font-normal text-left sm:text-center mb-8">
+                I am a Senior Software Engineer with 15+ years of experience, specializing in the intersection of scalable architecture and artificial intelligence. I build advanced AI agents and intelligent web applications on Google Cloud Platform, while leveraging deep expertise in delivering complex B2B & B2C e-commerce solutions.
+            </p>
+
+            <ul class="text-left text-xs sm:text-sm text-neon space-y-3 font-mono border-t border-gray-700 pt-6">
+                <!-- Added skill-item class for hover effects -->
+                <li class="flex items-start gap-3 skill-item">
+                    <span class="text-neon mt-1">▹</span>
+                    <span class="text-gray-300">AI Agents & Google ADK</span>
+                </li>
+                <li class="flex items-start gap-3 skill-item">
+                    <span class="text-neon mt-1">▹</span>
+                    <span class="text-gray-300">Google Cloud Platform & Vertex AI</span>
+                </li>
+                <li class="flex items-start gap-3 skill-item">
+                    <span class="text-neon mt-1">▹</span>
+                    <span class="text-gray-300">AI-Powered Web Application Development</span>
+                </li>
+                <li class="flex items-start gap-3 skill-item">
+                    <span class="text-neon mt-1">▹</span>
+                    <span class="text-gray-300">Technical Leadership & Team Management</span>
+                </li>
+                 <li class="flex items-start gap-3 skill-item">
+                    <span class="text-neon mt-1">▹</span>
+                    <span class="text-gray-300">B2C & B2B E-commerce Solutions</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 pb-8">
+            <a href="https://github.com/u-maxx" target="_blank" class="btn-neon border border-solid px-8 py-3 rounded-full font-retro uppercase text-xs sm:text-sm tracking-widest flex items-center gap-2 w-full sm:w-auto justify-center hover:scale-105 active:scale-95">
+                <span>👾</span> GitHub
+            </a>
+
+            <a href="https://linkedin.com/in/max-uroda" target="_blank" class="btn-neon border border-solid px-8 py-3 rounded-full font-retro uppercase text-xs sm:text-sm tracking-widest flex items-center gap-2 w-full sm:w-auto justify-center hover:scale-105 active:scale-95">
+                <span>💼</span> LinkedIn
+            </a>
+
+            <a href="https://x.com/u_maxx" target="_blank" class="btn-neon border border-solid px-8 py-3 rounded-full font-retro uppercase text-xs sm:text-sm tracking-widest flex items-center gap-2 w-full sm:w-auto justify-center hover:scale-105 active:scale-95">
+                <span>🛸</span> X.com
+            </a>
+        </div>
+
+    </main>
+
+</body>
+</html>
+
