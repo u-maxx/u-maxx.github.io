@@ -144,6 +144,16 @@ body {
     opacity: 0.6;
 }
 
+/* Blinking Terminal Cursor */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.cursor-blink {
+    animation: blink 1s step-end infinite;
+}
+
 /* Animations */
 @keyframes grid-move {
     0% { background-position: 0 0; }
@@ -173,3 +183,55 @@ body {
     transform: translateX(5px);
     text-shadow: 0 0 8px rgba(142, 255, 122, 0.5);
 }
+
+/* ===== Missing Responsive Utilities ===== */
+
+/* sm: (min-width: 40rem / 640px) */
+@media (min-width: 40rem) {
+    .sm\:flex-wrap {
+        flex-wrap: wrap;
+    }
+    .sm\:gap-4 {
+        gap: 1rem;
+    }
+    .sm\:mb-12 {
+        margin-bottom: 3rem;
+    }
+    .sm\:p-6 {
+        padding: 1.5rem;
+    }
+    .sm\:px-6 {
+        padding-inline: 1.5rem;
+    }
+    .sm\:px-8 {
+        padding-inline: 2rem;
+    }
+    .sm\:py-20 {
+        padding-block: 5rem;
+    }
+    .sm\:text-2xl {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+}
+
+/* md: (min-width: 48rem / 768px) */
+@media (min-width: 48rem) {
+    .md\:text-4xl {
+        font-size: 2.25rem;
+        line-height: 2.5rem;
+    }
+}
+
+/* lg: (min-width: 64rem / 1024px) */
+@media (min-width: 64rem) {
+    .lg\:text-5xl {
+        font-size: 3rem;
+        line-height: 1;
+    }
+    .lg\:text-6xl {
+        font-size: 3.75rem;
+        line-height: 1;
+    }
+}
+
