@@ -1,0 +1,27 @@
+{
+  "name": "u-maxx.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build:css": "npx @tailwindcss/cli -i input.css -o dist/styles.css --minify",
+    "watch:css": "npx @tailwindcss/cli -i input.css -o dist/styles.css --watch",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/u-maxx/u-maxx.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/u-maxx/u-maxx.github.io/issues"
+  },
+  "homepage": "https://github.com/u-maxx/u-maxx.github.io#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.2.1",
+    "husky": "^9.1.7",
+    "tailwindcss": "^4.2.1"
+  }
+}
