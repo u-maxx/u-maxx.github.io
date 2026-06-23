@@ -184,6 +184,27 @@ body {
     text-shadow: 0 0 8px rgba(142, 255, 122, 0.5);
 }
 
+/* Reviews Section */
+.review-card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.review-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 15px rgba(142, 255, 122, 0.15);
+    border-color: rgba(142, 255, 122, 0.5);
+}
+
+.review-avatar {
+    filter: grayscale(100%) contrast(1.1);
+    transition: all 0.3s ease;
+}
+
+.review-card:hover .review-avatar {
+    filter: grayscale(0%) contrast(1);
+    box-shadow: 0 0 10px rgba(142, 255, 122, 0.5);
+}
+
 /* ===== Missing Responsive Utilities ===== */
 
 /* sm: (min-width: 40rem / 640px) */
