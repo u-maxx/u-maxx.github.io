@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Maksym Lakhman",
+    "role": "AQA Software Engineer",
+    "date": "March 15, 2024",
+    "connection": "worked with Maksym on the same team",
+    "text": "Maxym is an excellent specialist with strong communication skills and technical expertise. experienced Magento/Adobe Commerce developer, capable of investigating deep issues and a good teammate.",
+    "avatar": "https://media.licdn.com/dms/image/v2/D4E03AQG_Q9yQW6v_Sg/profile-displayphoto-shrink_100_100/0/1710188647087?e=1724889600&v=beta&t=example1",
+    "linkedin": "https://www.linkedin.com/in/maksym-lakhman"
+  },
+  {
+    "name": "J Flacks",
+    "role": "Technical Lead at Innox Trading Ltd t/a chemist-4-u.com",
+    "date": "February 22, 2024",
+    "connection": "managed Maksym directly",
+    "text": "Max worked with us to help improve the uncached performance of many of our key pages. identified inefficiencies and helped us implement fixes to serve pages much faster. Max is a fantastic developer with a great understanding of Magento 2.",
+    "avatar": "https://media.licdn.com/dms/image/v2/D4D03AQE_E_example/profile-displayphoto-shrink_100_100/0/1700000000000?e=1724889600&v=beta&t=example2",
+    "linkedin": "https://www.linkedin.com/in/jflacks"
+  },
+  {
+    "name": "Matias Hidalgo",
+    "role": "Magento Tech Lead and SRE at McFadyen / 7x Magento Certified",
+    "date": "November 15, 2023",
+    "connection": "worked with Maksym but on different teams",
+    "text": "He is a kind guy to work with, always open to listen and help others, he really knows Adobe Commerce and undertand his complex architecture.",
+    "avatar": "https://media.licdn.com/dms/image/v2/D4E03AQG_example/profile-displayphoto-shrink_100_100/0/1700000000000?e=1724889600&v=beta&t=example3",
+    "linkedin": "https://www.linkedin.com/in/matiashidalgo"
+  },
+  {
+    "name": "Martin Arrua",
+    "role": "eCommerce Specialist",
+    "date": "November 4, 2023",
+    "connection": "worked with Maksym on the same team",
+    "text": "Max is a highly talented and dedicated software engineer. I had the pleasure of working with with Max a couple of years ago, and I am continually impressed by his technical expertise, ethic, and professionalism. Max is a brilliant software engineer with a deep understanding of programming languages, algorithms, and software design principles. His ability to solve complex problems and write clean code is truly commendable.",
+    "avatar": "https://media.licdn.com/dms/image/v2/C4E03AQF_example/profile-displayphoto-shrink_100_100/0/1700000000000?e=1724889600&v=beta&t=example4",
+    "linkedin": "https://www.linkedin.com/in/martinarrua"
+  }
+]
