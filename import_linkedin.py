@@ -44,6 +44,42 @@ SCREENSHOT_DATA = [
   }
 ]
 
+def parse_recommendations_html(html_content):
+    """
+    Parses LinkedIn recommendations from HTML content using BeautifulSoup.
+    """
+    from bs4 import BeautifulSoup
+    soup = BeautifulSoup(html_content, 'lxml')
+    items = soup.select(".artdeco-list__item")
+
+    scraped_data = []
+    for item in items:
+        name_elem = item.select_one(".t-bold span[aria-hidden='true']")
+        role_elem = item.select_one(".t-14.t-black--light.t-normal")
+        date_elem = item.select_one(".t-12.t-black--light.t-normal")
+        text_elem = item.select_one(".inline-show-more-text")
+        link_elem = item.select_one("a[data-field='recommendation_author_origin_url']")
+        img_elem = item.select_one("img")
+
+        if name_elem:
+            name = name_elem.get_text().strip()
+            role = role_elem.get_text().strip() if role_elem else ""
+            date = date_elem.get_text().strip() if date_elem else ""
+            # Handle text content which might be inside multiple spans
+            text = text_elem.get_text().strip() if text_elem else ""
+            profile_link = link_elem.get("href") if link_elem else ""
+            image_url = img_elem.get("src") if img_elem else ""
+
+            scraped_data.append({
+                "name": name,
+                "role": role,
+                "date": date,
+                "text": text.replace("...see more", "").replace("\n", " ").strip(),
+                "linkedin": profile_link if profile_link.startswith("http") else f"https://www.linkedin.com{profile_link}",
+                "avatar": image_url
+            })
+    return scraped_data
+
 async def scrape_linkedin_recommendations(profile_url):
     print(f"🚀 Attempting to scrape live data from {profile_url}...")
     async with async_playwright() as p:
@@ -63,34 +99,8 @@ async def scrape_linkedin_recommendations(profile_url):
                 return None
 
             await page.wait_for_selector(".artdeco-list__item", timeout=5000)
-            items = await page.query_selector_all(".artdeco-list__item")
-
-            scraped_data = []
-            for item in items:
-                name_elem = await item.query_selector(".t-bold span[aria-hidden='true']")
-                role_elem = await item.query_selector(".t-14.t-black--light.t-normal")
-                date_elem = await item.query_selector(".t-12.t-black--light.t-normal")
-                text_elem = await item.query_selector(".inline-show-more-text")
-                link_elem = await item.query_selector("a[data-field='recommendation_author_origin_url']")
-                img_elem = await item.query_selector("img")
-
-                if name_elem:
-                    name = (await name_elem.inner_text()).strip()
-                    role = (await role_elem.inner_text()).strip() if role_elem else ""
-                    date = (await date_elem.inner_text()).strip() if date_elem else ""
-                    text = (await text_elem.inner_text()).strip() if text_elem else ""
-                    profile_link = await link_elem.get_attribute("href") if link_elem else ""
-                    image_url = await img_elem.get_attribute("src") if img_elem else ""
-
-                    scraped_data.append({
-                        "name": name,
-                        "role": role,
-                        "date": date,
-                        "text": text.replace("...see more", "").replace("\n", " ").strip(),
-                        "linkedin": profile_link if profile_link.startswith("http") else f"https://www.linkedin.com{profile_link}",
-                        "avatar": image_url
-                    })
-            return scraped_data
+            content = await page.content()
+            return parse_recommendations_html(content)
         except Exception as e:
             print(f"❌ Scraper error: {e}")
             return None
@@ -142,13 +152,28 @@ def update_html_with_reviews(reviews):
 
 async def main():
     profile_url = "https://www.linkedin.com/in/max-uroda"
+    local_file = "recommendations.html"
+    final_data = None
 
-    live_data = await scrape_linkedin_recommendations(profile_url)
+    # Check for local file first (most reliable for user running locally)
+    if os.path.exists(local_file):
+        print(f"📄 Found local file '{local_file}'. Parsing...")
+        with open(local_file, "r", encoding="utf-8") as f:
+            content = f.read()
+            final_data = parse_recommendations_html(content)
+            if final_data:
+                print(f"✅ Successfully parsed {len(final_data)} items from local file.")
+            else:
+                print("⚠️ Local file found but no recommendations were parsed.")
 
-    final_data = live_data if live_data else SCREENSHOT_DATA
+    # Try live scraping if no local data
+    if not final_data:
+        final_data = await scrape_linkedin_recommendations(profile_url)
 
-    if not live_data:
+    # Fallback to hardcoded template
+    if not final_data:
         print("💡 Falling back to template data (from screenshot).")
+        final_data = SCREENSHOT_DATA
 
     # Save to reviews.json
     with open("reviews.json", "w", encoding="utf-8") as f:
