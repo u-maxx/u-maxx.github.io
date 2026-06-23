@@ -24,7 +24,7 @@ Since the cloud environment is often blocked by LinkedIn's security walls, the b
    source .venv/bin/activate # or .venv\Scripts\activate on Windows
    uv pip install playwright beautifulsoup4 lxml
    playwright install chromium
-   python import_linkedin.py
+   python scripts/import_linkedin.py
    ```
 
 3. **Rebuild the Site:**

@@ -111,7 +111,12 @@ def update_html_with_reviews(reviews):
     """
     Updates index.html with the latest reviews data.
     """
-    with open("index.html", "r", encoding="utf-8") as f:
+    index_path = os.path.join(os.path.dirname(__file__), "..", "index.html")
+    if not os.path.exists(index_path):
+        print(f"❌ Could not find index.html at {index_path}")
+        return
+
+    with open(index_path, "r", encoding="utf-8") as f:
         html = f.read()
 
     # Generate the HTML for the reviews
@@ -144,7 +149,7 @@ def update_html_with_reviews(reviews):
 
     if pattern.search(html):
         new_html = pattern.sub(rf'\1{reviews_html}\n            \2', html)
-        with open("index.html", "w", encoding="utf-8") as f:
+        with open(index_path, "w", encoding="utf-8") as f:
             f.write(new_html)
         print("✅ index.html updated with latest reviews.")
     else:
@@ -152,7 +157,10 @@ def update_html_with_reviews(reviews):
 
 async def main():
     profile_url = "https://www.linkedin.com/in/max-uroda"
-    local_file = "recommendations.html"
+    # Look for recommendations.html in the root directory
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    local_file = os.path.join(base_dir, "recommendations.html")
+    reviews_json_path = os.path.join(os.path.dirname(__file__), "reviews.json")
     final_data = None
 
     # Check for local file first (most reliable for user running locally)
@@ -176,7 +184,7 @@ async def main():
         final_data = SCREENSHOT_DATA
 
     # Save to reviews.json
-    with open("reviews.json", "w", encoding="utf-8") as f:
+    with open(reviews_json_path, "w", encoding="utf-8") as f:
         json.dump(final_data, f, indent=2)
     print(f"✅ reviews.json updated with {len(final_data)} items.")
 
